@@ -62,7 +62,6 @@ function PongBoard() {
             if (data === "Game reset.") {
                 // Here, reset the game state or refetch the initial game state
                 setIsGameEnded(false);
-                temp = 0;
                 fetchGameState();
                 window.location.reload()
             }
@@ -132,7 +131,6 @@ function PongBoard() {
              <p className="player-score">Score: {gameState.player1.score}</p>
         <div className="pong-board">
             <div className="pong-paddle left-paddle" style={{top: gameState.player1.yPosition + "px"}}></div>
-            <div className="pong-paddle right-paddle" style={{top: gameState.player2.yPosition + "px"}}></div>
             <div className="pong-ball" style={{left: gameState.ball.xPosition + "px", top: gameState.ball.yPosition + "px"}}></div>
         </div>
         <button onClick={handleRestart} className="restart-button">Restart</button>
