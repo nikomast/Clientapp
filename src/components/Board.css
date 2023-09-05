@@ -1,0 +1,125 @@
+.pong-board {
+    width: 600px;
+    height: 300px;
+    background-color: black;
+    position: relative;
+    margin: 0 auto;
+    border: 5px solid rgb(0, 13, 252);
+}
+
+.pong-paddle {
+    width: 10px;
+    height: 30px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pong-paddle2 {
+    width: 15px;
+    height: 400px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+}
+
+.left-paddle {
+    left: 0;
+}
+
+.right-paddle {
+    right: 0;
+}
+
+.pong-ball {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.restart-button {
+    display: block; /* ensures the button takes up the full width of its content and sits below the game board */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 280px;
+    font-size: 1rem;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pong-container {
+    position: relative;
+    display: inline-block; /* Makes the container only as wide as necessary */
+} 
+
+.restart-button:hover {
+    background-color: #555;
+}
+
+.player-score {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.player-input {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-input input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.player-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.player-input button:hover {
+    background-color: #0056b3;
+}
+
+.high-scores {
+    margin-top: 20px;
+    border-top: 2px solid #eee;
+    padding-top: 0px;
+}
+
+.highscore-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.highscore-list li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.player-name {
+    font-weight: bold;
+}
+
