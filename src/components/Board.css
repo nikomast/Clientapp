@@ -17,7 +17,7 @@
 }
 
 .pong-paddle2 {
-    width: 15px;
+    width: 150px;
     height: 400px;
     background-color: white;
     position: absolute;
@@ -123,3 +123,12 @@
     font-weight: bold;
 }
 
+.info-message {
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #eee;
+    border-radius: 5px;
+    text-align: center;
+}

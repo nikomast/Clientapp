@@ -6,6 +6,8 @@ function PongBoard() {
     const [playerName, setPlayerName] = useState("");
     const [isGameEnded, setIsGameEnded] = useState(false);
     const [highScores, setHighScores] = useState([]);
+    const [message, setMessage] = useState('');
+    const [temp, setTemp] = useState(0);
 
 
     async function fetchGameState() {
@@ -60,14 +62,16 @@ function PongBoard() {
             if (data === "Game reset.") {
                 // Here, reset the game state or refetch the initial game state
                 setIsGameEnded(false);
+                temp = 0;
                 fetchGameState();
+                window.location.reload()
             }
         } catch (error) {
             console.error("Error restarting game:", error);
         }
     };
 
-    async function fetchHighScores() {
+    async function fetchHighScores() {;
         try {
             const response = await fetch('https://localhost:7295/api/highscores/top/5');
             if (response.ok) {
@@ -81,6 +85,44 @@ function PongBoard() {
             console.error('Error fetching high scores:', error);
         }
     }
+
+    async function submitScore() {
+        if(temp === 0){
+        const playerScore = gameState ? gameState.player1.score : 0;
+    
+        const scoreData = {
+            PlayerName: playerName,
+            Score: playerScore
+        };
+    
+        console.log("Sending score data:", scoreData);
+    
+        try {
+            const response = await fetch('https://localhost:7295/api/highscores/record', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(scoreData)
+            });
+    
+            if (!response.ok) {
+                console.error('Failed to submit score:', await response.text());
+                setMessage("Ei tolla tuloksella kuuhun mennä");
+                return;
+            }
+            setMessage("Pääsit listalle tms");
+            setTemp(1);
+            fetchHighScores();
+            const responseData = await response.text();
+            console.log("Response from server:", responseData);
+    
+        } catch (error) {
+            console.error("Error submitting score:", error);
+        }
+    }
+    }
+    
     
 
     if (!gameState) return "Loading...";
@@ -95,20 +137,21 @@ function PongBoard() {
         </div>
         <button onClick={handleRestart} className="restart-button">Restart</button>
         {gameState && !gameState.state.value ? (
-        <div className="player-input">
+    <div className="player-input">
     <input 
         type="text" 
         placeholder="Enter your name"
         value={playerName}
         onChange={(e) => setPlayerName(e.target.value)}
     />
-    <button onClick={() => console.log("Player's name:", playerName, "Players Score: ", gameState.player1.score)}>Submit</button>
+    <button onClick={submitScore}>Submit</button>
+    {message && <div className="info-message">{message}</div>}
     <div className="high-scores">
-        <h2>High Scores</h2>
-            <pre>{JSON.stringify(highScores, null, 2)}</pre>
+            <h2>High Scores</h2>
+        <pre>{JSON.stringify(highScores, null, 2)}</pre>
         </div>
+            </div>
 
-    </div>
         ) : null}
         </div>
     );
